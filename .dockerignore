@@ -1,0 +1,33 @@
+# Created by .ignore support plugin (hsz.mobi)
+
+.a
+.dockerignore
+.cache
+.coverage
+.env
+.git
+.gitignore
+.gitlab-ci.yml
+.gitmodules
+.hypothesis/
+.idea
+.ipynb_checkpoints/
+.vscode
+Dockerfile
+README.md
+data
+dist
+doc
+docker
+vendor
+venv
+
+**/__pycache__
+**/node_modules
+**/yarn-error.log
+
+# Translations
+**/*.pot
+**/*.mo
+
+**/*.ipynb

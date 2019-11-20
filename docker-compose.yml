@@ -1,0 +1,38 @@
+version: '3.6'
+
+services:
+  db-server:
+    build:
+      context: docker/db-server
+      dockerfile: Dockerfile
+    ports:
+      - '5433:5432'
+    image: raven_db-server:latest
+    volumes:
+      - './data/postgres:/var/lib/postgresql/data'
+    env_file:
+      - .env
+    restart: unless-stopped
+
+  api-server:
+    build:
+      context: .
+      dockerfile: docker/api-server/Dockerfile
+    ports:
+      - '8000:8000'
+    image: raven_api-server:latest
+    volumes:
+      - '.:/raven'
+    command: >
+      sh -c "python3 manage.py migrate &&
+             python3 manage.py runserver 0.0.0.0:8000"
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=db-server
+    depends_on:
+      - db-server
+    restart: unless-stopped
+
+volumes:
+  db-server:
