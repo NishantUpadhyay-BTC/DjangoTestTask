@@ -1,0 +1,1 @@
+from core.models.model_app_tenant import *
